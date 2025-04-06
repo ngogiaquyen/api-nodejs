@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realtime Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #messages {
+      list-style-type: none;
+      padding: 0;
+    }
+    #messages li {
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+    }
+    input {
+      padding: 10px;
+      margin-top: 10px;
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Realtime Chat</h1>
+  <form>
+      <ul id="messages"></ul>
+      <input id="m" autocomplete="off" /><button>Send</button>
+  </form>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io(); // Kết nối với server
+
+    var form = document.querySelector('form');
+    var input = document.getElementById('m');
+    var messages = document.getElementById('messages');
+
+    // Khi nhận message từ server
+    socket.on('chat message', function(msg) {
+      var li = document.createElement('li');
+      li.textContent = msg;
+      messages.appendChild(li);
+    });
+
+    // Gửi message khi người dùng bấm nút send
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      socket.emit('chat message', input.value); // Gửi message tới server
+      input.value = ''; // Xóa input sau khi gửi
+    });
+  </script>
+</body>
+</html>
