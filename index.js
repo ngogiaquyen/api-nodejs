@@ -1,20 +1,19 @@
 const express = require("express");
 
 const os = require("os");
-const { startTikTokLive } = require('./routes/TiktokLiveComment');
 
 const app = express();
 const PORT = 8000;
 
-// Thay username TikTok của bạn
-const tiktokUsername = "realpewpew";
 
 // Gọi hàm để bắt đầu lắng nghe
-startTikTokLive(tiktokUsername);
-
-// Import route
 const sendEmail = require("./routes/SendEmail");
 const { sendEmailDeploy } = require("./routes/DeployNotification");
+const startTikTokLive = require('./routes/TiktokLiveComment');
+
+app.use("/comment", startTikTokLive);
+
+// Import route
 
 // Gắn route tại /chat
 app.use("/send-email", sendEmail);
