@@ -27,7 +27,7 @@ async function sendEmailDeploy() {
   `;
 
   await transporter.sendMail({
-    from: '"Tự học từ vựng" <your_email@gmail.com>',
+    from: '"Dự án my api nodejs" <your_email@gmail.com>',
     to: "dtc225180268@ictu.edu.vn",
     subject: "Thông báo deploy!",
     html: htmlContent,
