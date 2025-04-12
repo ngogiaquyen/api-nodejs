@@ -6,9 +6,9 @@ const schedule = require("node-schedule");
 // 🔐 Thông tin kết nối MySQL (thay bằng thông tin thật)
 const db = {
   host: "103.97.126.29",
-  user: "jcjvjome_api-nodejs",
-  password: "KhJfYvKw3wdVUzeWJx87",
-  database: "jcjvjome_api-nodejs",
+  user: "jcjvjome_all-project",
+  password: "nwdzyNVGFAWxJZeAL2ew",
+  database: "jcjvjome_all-project",
 };
 
 // 📧 Thông tin gửi email

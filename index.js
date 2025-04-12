@@ -11,7 +11,7 @@ const sendEmail = require("./routes/SendEmail");
 const { sendEmailDeploy } = require("./routes/DeployNotification");
 const startTikTokLive = require('./routes/TiktokLiveComment');
 
-app.use("/comment", startTikTokLive);
+// app.use("/comment", startTikTokLive);
 
 // Import route
 
