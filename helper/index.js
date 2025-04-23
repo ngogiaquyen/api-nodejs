@@ -3,6 +3,9 @@ const mysql = require("mysql2/promise");
 const nodemailer = require("nodemailer");
 const schedule = require("node-schedule");
 
+const cron = require('node-cron');
+const moment = require('moment-timezone');
+
 // 🔐 Thông tin kết nối MySQL (thay bằng thông tin thật)
 const db = {
   host: "103.97.126.29",
@@ -69,9 +72,15 @@ async function sendVocabEmail() {
 }
 
 // 🕗 Tự động gửi mỗi sáng 8h
-schedule.scheduleJob("0 8 * * *", sendVocabEmail);
+// schedule.scheduleJob("0 8 * * *", sendVocabEmail);
 // schedule.scheduleJob("15 22 * * *", sendVocabEmail);
 
+cron.schedule('* * * * *', () => {
+  const currentTimeInVN = moment().tz('Asia/Ho_Chi_Minh');
+  if (currentTimeInVN.hour() === 6 && currentTimeInVN.minute() === 30) {
+    sendVocabEmail();
+  }
+});
 // 🧪 Test ngay:
 // sendVocabEmail();
 module.exports = { sendVocabEmail };
